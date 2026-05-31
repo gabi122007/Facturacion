@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import org.openxava.annotations.Required;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -20,6 +21,9 @@ public class Cliente {
     @Column
     @Required
     private String nombre;
+
+    @Embedded
+    Direccion direccion;
 
 
 }
