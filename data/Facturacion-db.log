@@ -1,6 +1,11 @@
 /*C4*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C5*/SET SCHEMA PUBLIC
-create table Producto (numero integer not null, descripcion varchar(50), primary key (numero))
-INSERT INTO PRODUCTO VALUES(1,'cafe')
+alter table Producto add column fotos varchar(32)
+alter table Producto add column observaciones varchar(255)
+alter table Producto add column precio numeric(19,2)
+DELETE FROM PRODUCTO WHERE NUMERO=2
+INSERT INTO PRODUCTO VALUES(2,'introduccion a jpa','402881a99e803f33019e8040c5f10002',NULL,'',NULL)
+COMMIT
+INSERT INTO PRODUCTO VALUES(3,'n',NULL,'8046265EC0A801290000000062220CD2','',NULL)
 COMMIT

@@ -14,12 +14,12 @@ import javax.persistence.Id;
 public class Categoria {
     @Id
     @Hidden
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    @Column(length = 32)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(length=32)
     String oid;
 
-    @Column(length = 50)
-    String desripcion;
+    @Column(length=50)
+    String descripcion;
 
 }
