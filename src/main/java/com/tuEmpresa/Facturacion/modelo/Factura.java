@@ -1,20 +1,16 @@
 package com.tuEmpresa.Facturacion.modelo;
 
+import com.tuEmpresa.Facturacion.calculadores.CalculadorSiguienteNumeroParaAnyo;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import org.openxava.annotations.DefaultValueCalculator;
-import org.openxava.annotations.Hidden;
-import org.openxava.annotations.Required;
-import org.openxava.annotations.TextArea;
+import org.openxava.annotations.*;
 import org.openxava.calculators.CurrentLocalDateCalculator;
 import org.openxava.calculators.CurrentYearCalculator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Entity
 @Getter
@@ -32,7 +28,9 @@ public class Factura {
     @DefaultValueCalculator(CurrentYearCalculator.class)
     int anyo;
 
-    @Column(length=6)
+    @Column(length = 6)
+    @DefaultValueCalculator(value = CalculadorSiguienteNumeroParaAnyo.class,
+            properties = @PropertyValue(name = "anyo"))
     int numero;
 
     @Required
@@ -41,5 +39,15 @@ public class Factura {
 
     @TextArea
     String observaciones;
+
+    @ManyToOne(fetch=FetchType.LAZY, optional=false) // El cliente es obligatorio
+    Cliente cliente;
+
+    @ElementCollection
+    @ListProperties("producto.numero, producto.descripcion, cantidad")
+    Collection<Detalle> detalles;
+
+
+
 
 }
