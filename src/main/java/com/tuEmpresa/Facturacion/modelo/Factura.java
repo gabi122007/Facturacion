@@ -11,6 +11,12 @@ import org.openxava.calculators.CurrentYearCalculator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
+@View(members=
+        "anyo, numero, fecha;" +
+                "cliente;" +
+                "detalles;" +
+                "observaciones"
+)
 
 @Entity
 @Getter
@@ -40,7 +46,8 @@ public class Factura {
     @TextArea
     String observaciones;
 
-    @ManyToOne(fetch=FetchType.LAZY, optional=false) // El cliente es obligatorio
+    @ManyToOne(fetch=FetchType.LAZY, optional=false)
+    @ReferenceView("Simple")
     Cliente cliente;
 
     @ElementCollection
